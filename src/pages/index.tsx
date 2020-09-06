@@ -1,5 +1,5 @@
 import { Microphone } from "../../model/microphone"
-import { GetStaticProps } from 'next'
+import { GetStaticProps, GetServerSideProps } from 'next'
 import Link from 'next/link'
 import { openDB } from "../openDB"
 import React from 'react'
@@ -65,3 +65,15 @@ export const getStaticProps: GetStaticProps = async ctx => {
     const microphones = await db.all('select * from microphone where id > ? and id <= ?', min, max)
     return { props: { microphones } }
 }
+
+// export const getServerSideProps: GetServerSideProps = async ctx => {
+//     const currentPage = ctx.params?.currentPage || 0
+//     const currentPageNumber = +(currentPage || 0)
+
+//     const min = currentPageNumber * 5
+//     const max = (currentPageNumber + 1) * 5
+//     console.log(ctx.params)
+//     const db = await openDB()
+//     const microphones = await db.all('select * from microphone where id > ? and id <= ?', min, max)
+//     return { props: { microphones } }
+// }
